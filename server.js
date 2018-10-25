@@ -30,7 +30,7 @@ server.use(helmet());
 
 // Routes
 server.use("/notes", noteRouter);
-server.use("/users", userRouter);
+// server.use("/users", userRouter);
 
 // Initial GET - Remove during production
 server.get("/", (req, res) => {
