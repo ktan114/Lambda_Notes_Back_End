@@ -9,8 +9,7 @@ const noteSchema = new mongoose.Schema({
   body: String,
   createdBy: {
     type: ObjectId,
-    ref: "User",
-    required: true
+    ref: "User"
   }
 });
 
