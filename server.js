@@ -11,9 +11,7 @@ const userRouter = require("./users/userRoutes");
 const server = express();
 
 // Connect to mlab
-const mongoDB = `mongodb://${process.env.DB_USER}:${
-  process.env.DB_PASSWORD
-}@ds139920.mlab.com:39920/lambdanotes`;
+const mongoDB = process.env.MONGOURI;
 mongoose
   .connect(mongoDB)
   .then(connect => {
