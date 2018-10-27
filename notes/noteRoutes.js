@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
     .select("title body id createdBy")
     .populate("createdBy", "username -_id")
     .then(notes => {
-      res.status(200).json({ notes });
+      res.status(200).json(notes);
     })
     .catch(err => {
       res.status(500).json({ Error: "Notes not found" });
@@ -44,11 +44,11 @@ router.get("/", (req, res) => {
 */
 router.post("/", (req, res) => {
   Note.create(req.body)
-    .then(note => {
-      res.status(201).json({ note });
+    .then(() => {
+      res.status(201);
     })
-    .catch(err => {
-      res.status(500).json({ Err: "error creating note" });
+    .catch(() => {
+      res.status(400).json({ Err: "error creating note" });
     });
 });
 
@@ -64,10 +64,10 @@ router.get("/:id", (req, res) => {
     .select("title body id createdBy")
     .populate("createdBy", "username -_id")
     .then(note => {
-      res.status(200).json({ note });
+      res.status(200).json(note);
     })
     .catch(err => {
-      res.status(404).json({ Error: "Cannot fulfill request " });
+      res.status(400).json(err);
     });
 });
 
@@ -81,11 +81,11 @@ router.put("/:id", (req, res) => {
   const note = req.body;
 
   Note.findByIdAndUpdate(id, note)
-    .then(response => {
-      res.status(200).json({ note });
+    .then(() => {
+      res.status(200);
     })
     .catch(err => {
-      res.status(500).json({ err: "Cannot edit" });
+      res.status(400).json(err);
     });
 });
 
@@ -98,11 +98,11 @@ router.delete("/:id", (req, res) => {
   const id = req.params.id;
 
   Note.findByIdAndRemove(id)
-    .then(note => {
-      res.status(200).send("Note deleted successfully");
+    .then(() => {
+      res.status(200);
     })
     .catch(err => {
-      res.status(500).json({ Error: "Cannot delete " });
+      res.status(400).json(err);
     });
 });
 
