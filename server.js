@@ -28,7 +28,7 @@ server.use(helmet());
 
 // Routes
 server.use("/notes", noteRouter);
-server.use("/users", userRouter);
+// server.use("/users", userRouter);
 
 // Connect to port
 const port = process.env.PORT || 5000;
