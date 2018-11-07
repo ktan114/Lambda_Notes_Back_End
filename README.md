@@ -3,7 +3,7 @@
 This repository will have the backend code for the Lambda Notes project
 
 ## Technologies used
-    - Node
-    - Express
-    - mLabs
-    - Passport
+- Node
+- Express
+- mLabs
+- Passport
