@@ -22,7 +22,7 @@ const Note = require("./Note");
 
 /*
     @route  notes
-    @desc   Retrieve all notes with selectors (title, body, id, createdBy)
+    @desc   Retrieve all notes in the database
     @access Private (Production) | Public (Development)
 */
 router.get("/", (req, res) => {
