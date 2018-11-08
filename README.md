@@ -12,11 +12,11 @@ This repository will have the backend code for the Lambda Notes project includin
 
 ### Note Routes
 
-GET `/notes/` - Retrieve all notes in the database
+GET `/notes` - Retrieve all notes in the database
 
 GET `/notes/:id` - Retrieve a specific note using by ID
 
-POST `/notes/` - Create a new note
+POST `/notes` - Create a new note
 
 PUT `/notes/:id` - Edit an existing note by ID
 
@@ -28,7 +28,7 @@ GET `/users` - Retrieve all users in the database
 
 GET `/users/:id` - Retrieve a specific user by ID
 
-POST `/users/` - Create a new user
+POST `/users` - Create a new user
 
 PUT `/users/:id` - Edit a user's information by ID
 
