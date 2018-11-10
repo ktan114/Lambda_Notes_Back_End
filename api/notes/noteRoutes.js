@@ -21,7 +21,7 @@ const Note = require("./Note");
 // }
 
 /*
-    @route  notes
+    @route  GET notes
     @desc   Retrieve all notes in the database
     @access Private (Production) | Public (Development)
 */
@@ -38,7 +38,7 @@ router.get("/", (req, res) => {
 });
 
 /*
-    @route  notes
+    @route  POST notes
     @desc   Create a new note
     @access Private (Production) | Public (Development)
 */
@@ -53,7 +53,7 @@ router.post("/", (req, res) => {
 });
 
 /*
-    @route  notes/:id
+    @route  GET notes/:id
     @desc   Retrieve a specific note using ID
     @access Private (Production) | Public (Development)
 */
@@ -72,7 +72,7 @@ router.get("/:id", (req, res) => {
 });
 
 /*
-    @route  notes/:id
+    @route  PUT notes/:id
     @desc   Edit an existing note by ID
     @access Private (Production) | Public (Development)
 */
@@ -90,7 +90,7 @@ router.put("/:id", (req, res) => {
 });
 
 /*
-    @route  notes/:id
+    @route  DELETE notes/:id
     @desc   Delete a note by ID
     @access Private (Production) | Public (Development)
 */

@@ -1,8 +1,8 @@
-// const express = require('express');
-// const router = express.Router();
-// const jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const jwt = require('jsonwebtoken');
 
-// const User = require('./User');
+const User = require('./User');
 
 // // Helper Functions
 // const getTokenForUser = userObject => {
@@ -24,74 +24,92 @@
 //     }
 // }
 
-// // POST - create a new user
-// router.post('/user', (req,res) => {
+/*
+    @route  POST users
+    @desc   Create a new user(register)
+    @access Public
+*/
+router.post('/', (req,res) => {
+    User
+    .create(req.body)
+    .then(user => {
+        const token = getTokenForUser({ username: user.username })
+        res.status(201).json({ user, token })
+    })
+    .catch(err => {
+        res.status(500).json({ Error: err})
+    })
+})
 
-//     User
-//     .create(req.body)
-//     .then(user => {
-//         const token = getTokenForUser({ username: user.username })
-//         res.status(201).json({ user, token })
-//     })
-//     .catch(err => {
-//         res.status(500).json({ Error: err})
-//     })
-// })
+/*
+    @route  GET users
+    @desc   Retrieve the list of users
+    @access Private
+*/
+router.get('/', validateToken, (req, res) => {
+    User
+    .find()
+    .then(users => {
+        res.status(200).json({ users })
+    })
+    .catch(err => {
+        res.status(500).json({ Error: err })
+    })
+})
 
-// // GET - retrieve list of users created
-// router.get('/users', validateToken, (req, res) => {
+/*
+    @route  GET users/:id
+    @desc   Retrieve a specific user(login)
+    @access Private 
+*/
+router.get('/:id', validateToken, (req, res) => {
+    const id = req.params.id;
 
-//     User
-//     .find()
-//     .then(users => {
-//         res.status(200).json({ users })
-//     })
-//     .catch(err => {
-//         res.status(500).json({ Error: err })
-//     })
-// })
+    User
+    .findById(id).select('-_id -__v')
+    .then(user => {
+        res.status(200).json({ user })
+    })
+    .catch(err => {
+        res.status(404).json({ Message: "User not found" })
+    })
+})
 
-// // GET - retrieve a specific user using ID
-// router.get('/user/:id', validateToken, (req, res) => {
-//     const id = req.params.id;
+/*
+    @route  PUT users/:id
+    @desc   Edit a user's information by ID
+    @access Private
+*/
+router.put('/:id', validateToken, (req, res) => {
+    const id = req.params.id;
+    const updateUser = req.body;
 
-//     User
-//     .findById(id).select('-_id -__v')
-//     .then(user => {
-//         res.status(200).json({ user })
-//     })
-//     .catch(err => {
-//         res.status(404).json({ Message: "User not found" })
-//     })
-// })
+    User
+    .findByIdAndUpdate(id, updateUser)
+    .then(user => {
+        res.status(200).json({ updateUser })
+    })
+    .catch(err => {
+        res.status(400).json({ Message: "User not found" })
+    })
+})
 
-// // PUT - edit user information 
-// router.put('/user/:id', validateToken, (req, res) => {
-//     const id = req.params.id;
-//     const updateUser = req.body;
+/*
+    @route  DELETE users/:id
+    @desc   Delete a user's information by ID
+    @access Private
+*/
+router.delete('/user/:id', validateToken, (req, res) => {
+    const id = req.params.id;
 
-//     User
-//     .findByIdAndUpdate(id, updateUser)
-//     .then(user => {
-//         res.status(200).json({ updateUser })
-//     })
-//     .catch(err => {
-//         res.status(400).json({ Message: "User not found" })
-//     })
-// })
+    User
+    .findByIdAndRemove(id)
+    .then(user => {
+        res.status(200).send('User is deleted')
+    })
+    .catch(err => {
+        res.status(404).json({ Error: 'User not found' })
+    })
+})
 
-// // DELETE - deletes a user
-// router.delete('/user/:id', validateToken, (req, res) => {
-//     const id = req.params.id;
-
-//     User
-//     .findByIdAndRemove(id)
-//     .then(user => {
-//         res.status(200).send('User is deleted')
-//     })
-//     .catch(err => {
-//         res.status(404).json({ Error: 'User not found' })
-//     })
-// })
-
-// module.exports = router;
+module.exports = router;
