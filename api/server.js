@@ -2,8 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const cors = require("cors");
-require("dotenv").config();
+const passport = require("passport");
 
+const uri = require("./config/keys").uri;
+require("./config/config_passport.js")(passport);
 const noteRouter = require("./notes/noteRoutes");
 const userRouter = require("./users/userRoutes");
 
@@ -11,9 +13,8 @@ const userRouter = require("./users/userRoutes");
 const server = express();
 
 // Connect to mlab
-const mongoDB = process.env.MONGOURI;
 mongoose
-  .connect(mongoDB)
+  .connect(uri)
   .then(connect => {
     console.log("Connected!");
   })
@@ -25,6 +26,7 @@ mongoose
 server.use(express.json());
 server.use(cors());
 server.use(helmet());
+server.use(passport.initialize());
 
 // Routes
 server.use("/notes", noteRouter);
