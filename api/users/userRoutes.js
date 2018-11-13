@@ -41,11 +41,11 @@ router.get('/:id', passport.authenticate("jwt", { session: false }), (req, res) 
 })
 
 /*
-    @route  POST users
+    @route  POST users/register
     @desc   Create a new user(register)
     @access Public
 */
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
     User
     .create(req.body)
     .then(user => {
@@ -54,6 +54,35 @@ router.post('/', (req, res) => {
     })
     .catch(err => {
         res.status(500).json({ Error: err})
+    })
+})
+
+/*
+    @route  POST users/login
+    @desc   Login with user information
+    @access Public
+*/
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    User.findOne({ username }).then(user => {
+        if (!user) return res.status(401).json({ errorMessage: "Invalid Login" });
+        user.validatePassword(password)
+        .then(verified => {
+            if (verified) {
+                const payload = {
+                    id: user._id,
+                    email: user.username,
+                    password: user.password
+                }
+                const token = jwt.sign(payload, secret, { expiresIn: "7d" })
+                res.status(201).json({ token, user })
+            }
+        })
+        .catch(err => res.status(401))
+    })
+    .catch(err => {
+        res.status(500)
     })
 })
 
