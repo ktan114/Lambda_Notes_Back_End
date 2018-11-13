@@ -46,7 +46,7 @@ router.post('/', (req,res) => {
     @desc   Retrieve the list of users
     @access Private
 */
-router.get('/', validateToken, (req, res) => {
+router.get('/', (req, res) => {
     User
     .find()
     .then(users => {
@@ -62,7 +62,7 @@ router.get('/', validateToken, (req, res) => {
     @desc   Retrieve a specific user(login)
     @access Private 
 */
-router.get('/:id', validateToken, (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id;
 
     User
@@ -80,7 +80,7 @@ router.get('/:id', validateToken, (req, res) => {
     @desc   Edit a user's information by ID
     @access Private
 */
-router.put('/:id', validateToken, (req, res) => {
+router.put('/:id', (req, res) => {
     const id = req.params.id;
     const updateUser = req.body;
 
@@ -99,7 +99,7 @@ router.put('/:id', validateToken, (req, res) => {
     @desc   Delete a user's information by ID
     @access Private
 */
-router.delete('/user/:id', validateToken, (req, res) => {
+router.delete('/user/:id', (req, res) => {
     const id = req.params.id;
 
     User
