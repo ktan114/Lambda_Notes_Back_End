@@ -4,22 +4,6 @@ const router = express.Router();
 
 const Note = require("./Note");
 
-// // Helper Function
-// const validateToken = (req, res, next) => {
-//     const token = req.headers.authorization;
-//     if (!token) {
-//         res.status(422).json({ Error: 'No token found' })
-//     } else {
-//         jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-//             if (err) {
-//                 res.status(401).json({ Error: "Token invalid", message: err });
-//             } else {
-//                 next();
-//             }
-//         })
-//     }
-// }
-
 /*
     @route  GET notes
     @desc   Retrieve all notes in the database
