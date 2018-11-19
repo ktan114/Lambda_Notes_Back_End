@@ -12,27 +12,29 @@ This repository will have the backend code for the Lambda Notes project includin
 
 ### Note Routes
 
-GET `/notes` - Retrieve all notes in the database
+GET `notes` - Retrieve all notes in the database
 
-GET `/notes/:id` - Retrieve a specific note using by ID
+GET `notes/:id` - Retrieve a specific note using by ID
 
-POST `/notes` - Create a new note
+POST `notes` - Create a new note
 
-PUT `/notes/:id` - Edit an existing note by ID
+PUT `notes/:id` - Edit an existing note by ID
 
-DELETE `/notes/:id` - Delete a note by ID
+DELETE `notes/:id` - Delete a note by ID
 
 ### User Routes
 
-GET `/users` - Retrieve all users in the database
+GET `users` - Retrieve all users in the database
 
-GET `/users/:id` - Retrieve a specific user by ID
+GET `users/:id` - Retrieve a specific user by ID
 
-POST `/users` - Create a new user
+POST `users/register` - Registers a new user
 
-PUT `/users/:id` - Edit a user's information by ID
+POST `users/login` - Logs in a user and generates a token
 
-DELETE `/users/:id` - Delete a user's information by ID
+PUT `users/:id` - Edit a user's information by ID
+
+DELETE `users/:id` - Delete a user's information by ID
 
 
 

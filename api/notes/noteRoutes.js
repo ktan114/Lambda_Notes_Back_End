@@ -5,7 +5,7 @@ const router = express.Router();
 const Note = require("./Note");
 
 /*
-    @route  GET notes
+    @route  GET notes/
     @desc   Retrieve all notes in the database
     @access Private (Production) | Public (Development)
 */
@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 });
 
 /*
-    @route  POST notes
+    @route  POST notes/
     @desc   Create a new note
     @access Private (Production) | Public (Development)
 */
