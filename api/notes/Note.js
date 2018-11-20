@@ -6,11 +6,12 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  body: String
-  // createdBy: {
-  //   type: ObjectId,
-  //   ref: "User"
-  // }
+  body: String,
+  createdBy: {
+    type: ObjectId,
+    ref: "User",
+    required: true
+  }
 });
 
 module.exports = mongoose.model("Note", noteSchema, "notes");
