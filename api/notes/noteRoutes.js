@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 // const jwt = require('jsonwebtoken');
 
 const Note = require("./Note");
@@ -9,17 +10,19 @@ const Note = require("./Note");
     @desc   Retrieve all notes in the database
     @access Private (Production) | Public (Development)
 */
-router.get("/", (req, res) => {
-  Note.find()
-    .select("title body id createdBy")
-    .populate("createdBy", "username -_id")
-    .then(notes => {
-      res.status(200).json(notes);
-    })
-    .catch(err => {
-      res.status(500).json({ Error: "Notes not found" });
-    });
-});
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Note.find({ createdBy: req.user._id })
+      .then(notes => {
+        res.status(200).json(notes);
+      })
+      .catch(err => {
+        res.status(500).json({ Error: "Notes not found" });
+      });
+  }
+);
 
 /*
     @route  POST notes/
