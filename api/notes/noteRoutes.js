@@ -35,7 +35,7 @@ router.post(
   (req, res) => {
     Note.create(req.body)
       .then(() => {
-        res.status(201).json(Created);
+        res.status(201).json("Created");
       })
       .catch(() => {
         res.status(400).json({ Err: "error creating note" });
