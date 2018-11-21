@@ -35,7 +35,7 @@ router.post(
   (req, res) => {
     Note.create(req.body)
       .then(() => {
-        res.status(201);
+        res.status(201).json(Created);
       })
       .catch(() => {
         res.status(400).json({ Err: "error creating note" });
@@ -55,8 +55,6 @@ router.get(
     const id = req.params.id;
 
     Note.findById(id)
-      .select("title body id createdBy")
-      .populate("createdBy", "username -_id")
       .then(note => {
         res.status(200).json(note);
       })
@@ -80,7 +78,7 @@ router.put(
 
     Note.findByIdAndUpdate(id, note)
       .then(() => {
-        res.status(200);
+        res.status(200).json("Success");
       })
       .catch(err => {
         res.status(400).json(err);
@@ -101,7 +99,7 @@ router.delete(
 
     Note.findByIdAndRemove(id)
       .then(() => {
-        res.status(200);
+        res.status(200).json("Deleted");
       })
       .catch(err => {
         res.status(400).json(err);
