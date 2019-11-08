@@ -38,7 +38,7 @@ mongoose
 server.use(express.json());
 server.use(
   cors({
-    origin: 'https://lambdanoteskevin.netlify.com',
+    origin: 'http://localhost:3000',
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 );
