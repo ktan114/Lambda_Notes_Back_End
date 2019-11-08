@@ -5,6 +5,6 @@ const uri = {
   development: process.env.LOCALURI,
 };
 module.exports = {
-  uri: uri.production,
+  uri: uri.development,
   passport: process.env.PASSPORT,
 };
