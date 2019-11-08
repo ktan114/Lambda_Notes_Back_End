@@ -38,7 +38,7 @@ mongoose
 server.use(express.json());
 server.use(
   cors({
-    origin: 'https://lambdanoteskevin.netlify.com/login',
+    origin: 'https://lambdanoteskevin.netlify.com',
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 );
