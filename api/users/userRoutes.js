@@ -54,7 +54,7 @@ router.get(
 */
 router.post("/register", (req, res) => {
   const newUser = new User(req.body);
-
+  console.log('newuser', newUser)
   newUser
     .save()
     .then(user => {
